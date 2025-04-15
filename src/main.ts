@@ -20,13 +20,11 @@ async function main(): Promise<void> {
   const logger = getLogger('main');
   const { PORT, AUTH_TYPE } = getEnv();
   const app = express();
-  const path_app = express();
 
   app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
   app.use(cors());
   app.use(express.json());
   app.use(cookieParser());
-  app.use('/gateway', path_app);
 
   await DbMerlin.init();
 
@@ -48,15 +46,10 @@ async function main(): Promise<void> {
   }
 
   initApiPlaygroundRoutes(app);
-  initApiPlaygroundRoutes(path_app);
   initAuthRoutes(app, authHandler);
-  initAuthRoutes(path_app, authHandler);
   initFileRoutes(app);
-  initFileRoutes(path_app);
   initHealthRoutes(app);
-  initHealthRoutes(path_app);
   initSwaggerRoutes(app);
-  initSwaggerRoutes(path_app);
 
   app.listen(PORT, () => {
     logger.info(`🚀 AERIE-GATEWAY listening on ${PORT}`);
