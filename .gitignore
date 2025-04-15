@@ -3,3 +3,5 @@
 dist
 files/*
 node_modules
+.env
+.idea/

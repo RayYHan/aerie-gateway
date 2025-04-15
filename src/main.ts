@@ -7,10 +7,12 @@ import initApiPlaygroundRoutes from './packages/api-playground/api-playground.js
 import initAuthRoutes from './packages/auth/routes.js';
 import { DbMerlin } from './packages/db/db.js';
 import initFileRoutes from './packages/files/files.js';
+import initHasuraRoutes from './packages/hasura/hasura-events.js';
 import initHealthRoutes from './packages/health/health.js';
+import initPlanRoutes from './packages/plan/plan.js';
 import initSwaggerRoutes from './packages/swagger/swagger.js';
 import cookieParser from 'cookie-parser';
-import { AuthAdapter } from './packages/auth/types.js';
+import { AuthAdapter } from './types/auth.js';
 import { NoAuthAdapter } from './packages/auth/adapters/NoAuthAdapter.js';
 import { CAMAuthAdapter } from './packages/auth/adapters/CAMAuthAdapter.js';
 import { CSSOAuthAdapter } from './packages/auth/adapters/CSSOAuthAdapter.js';
@@ -49,6 +51,8 @@ async function main(): Promise<void> {
   initAuthRoutes(app, authHandler);
   initFileRoutes(app);
   initHealthRoutes(app);
+  initHasuraRoutes(app);
+  initPlanRoutes(app);
   initSwaggerRoutes(app);
 
   app.listen(PORT, () => {
